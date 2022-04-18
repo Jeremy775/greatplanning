@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<div class="d-flex justify-content-center align-items-center" style="height:100vh; background:linear-gradient(-45deg, #4E75AE 35%, transparent 10%)">
+		<div class="m-auto d-flex flex-column justify-content-center align-items-center">
+			<h1>Greta Planning</h3>
+			<table class="table table-dark">
+				<thead>
+					<tr>
+						<th>Email</th>
+						<th>tel</th>
+						<th>Adresse</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>gretalognes@gamil.com</td>
+						<td>012033224</td>
+						<td>Lognes espace diderorio</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="card text-center m-auto shadow-lg p-5 ">
+			<div class="card-body">
+				<h5 class="card-title">Accédez à votre compte</h5>
+				<form>
+					<!-- Email input -->
+					<div class="form-outline mb-4">
+						<input type="email" id="form2Example1" class="form-control"/>
+						<label class="form-label" for="form2Example1">Email address</label>
+					</div>
+
+					<!-- Password input -->
+					<div class="form-outline mb-4">
+						<input type="password" id="form2Example2" class="form-control"/>
+						<label class="form-label" for="form2Example2">Password</label>
+					</div>
+
+					<!-- 2 column grid layout for inline styling -->
+					<div class="row mb-4">
+						<div
+							class="col d-flex justify-content-center">
+							<!-- Checkbox -->
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="form2Example31" checked/>
+								<label class="form-check-label" for="form2Example31">
+									Remember me
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Submit button -->
+					<button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>{% endblock %}
