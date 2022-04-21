@@ -16,6 +16,9 @@ class Cours
     #[ORM\Column(type: 'string', length: 255)]
     private $nom_cours;
 
+    #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'cours')]
+    private $formations;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Cours
     public function setNomCours(string $nom_cours): self
     {
         $this->nom_cours = $nom_cours;
+
+        return $this;
+    }
+
+    public function getFormations(): ?Formations
+    {
+        return $this->formations;
+    }
+
+    public function setFormations(?Formations $formations): self
+    {
+        $this->formations = $formations;
 
         return $this;
     }

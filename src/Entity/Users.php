@@ -40,6 +40,9 @@ class Users
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commentaires::class)]
     private $commentaires;
 
+    #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'users')]
+    private $formations;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -160,6 +163,18 @@ class Users
                 $commentaire->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFormations(): ?Formations
+    {
+        return $this->formations;
+    }
+
+    public function setFormations(?Formations $formations): self
+    {
+        $this->formations = $formations;
 
         return $this;
     }
