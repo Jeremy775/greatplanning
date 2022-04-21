@@ -31,6 +31,10 @@ class Users
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adresse;
 
+    #[ORM\ManyToOne(targetEntity: roles::class, inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $role;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +108,18 @@ class Users
     public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getRole(): ?roles
+    {
+        return $this->role;
+    }
+
+    public function setRole(?roles $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
