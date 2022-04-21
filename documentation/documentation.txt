@@ -1,0 +1,74 @@
+Installation de composer
+    https://getcomposer.org/download/
+
+Installation de Symfony
+    https://symfony.com/doc/current/setup.html
+
+Configuration variable d'environnement en ajoutant PHP8 ds le PATH 
+
+Installation Symfony CLI 
+    scoop install symfony-cli
+__________________INSTALLATIONS________________________
+Creation projet Symfony
+    symfony new my_project_directory
+
+Installation de la sécurité HTTPS ds le serveur local 
+    symfony server:ca:install
+
+Lancement du serveur local 
+    Symfony server:start
+
+Installation de Bootstrap
+	https://yoandev.co/bootstrap-5-avec-symfony-5-et-webpack-encore/
+
+Installation des packages 
+    composer require symfony/maker-bundle --dev
+            require doctrine/annotations
+            require twig
+            require symfony/orm-pack
+            require --dev symfony/maker-bundle (no , yes)
+            require easycorp/easyadmin-bundle
+                    symfony/security-bundle
+________________________________________________________
+
+Creation Database
+    Modif fichier .env
+        DB_USER=root
+        DB_PASSWORD=
+        DB_HOST=localhost
+        DB_PORT=3306
+        DB_NAME=symfonytest
+        DATABASE_URL=mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}
+symfony console doctrine:database:create
+
+________________________________________________________
+
+SYSTEME D'AUTHENTIFICATION
+
+creation d'un user 
+    symfony consoler make:user User
+
+Creation register form
+        symfony console make:registration-form
+
+        symfony console make:auth
+RegistrationController 
+________________________________________________________
+
+Commandes utilisées
+    Affiche la liste des routes 
+        symfony console debug:router
+    Creation d'un Controller => src/Controller/...
+        symfony console make:controller HomeController
+    Creation DB
+        symfony console doctrine:database:create
+    Creation d'un user
+        symfony console make:user User
+    Migration
+        symfony console make:migration 
+        symfony console doctrine:migrations:migrate
+    Creation register form
+        symfony console make:registration-form
+
+        symfony console make:auth
+    
