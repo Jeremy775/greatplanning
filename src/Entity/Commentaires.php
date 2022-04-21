@@ -16,6 +16,15 @@ class Commentaires
     #[ORM\Column(type: 'text')]
     private $text;
 
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $auteur;
+
+    #[ORM\ManyToOne(targetEntity: users::class, inversedBy: 'commentaires')]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +38,42 @@ class Commentaires
     public function setText(string $text): self
     {
         $this->text = $text;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?string
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(string $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getUser(): ?users
+    {
+        return $this->user;
+    }
+
+    public function setUser(?users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
