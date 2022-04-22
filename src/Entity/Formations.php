@@ -24,10 +24,14 @@ class Formations
     #[ORM\OneToMany(mappedBy: 'formations', targetEntity: cours::class)]
     private $cours;
 
+    #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Classe::class)]
+    private $classes;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->cours = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +105,36 @@ class Formations
             // set the owning side to null (unless already changed)
             if ($cour->getFormations() === $this) {
                 $cour->setFormations(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classe>
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->setFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): self
+    {
+        if ($this->classes->removeElement($class)) {
+            // set the owning side to null (unless already changed)
+            if ($class->getFormation() === $this) {
+                $class->setFormation(null);
             }
         }
 

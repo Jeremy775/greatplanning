@@ -43,9 +43,13 @@ class Users
     #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'users')]
     private $formations;
 
+    #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'membres')]
+    private $classes;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +179,33 @@ class Users
     public function setFormations(?Formations $formations): self
     {
         $this->formations = $formations;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classe>
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->addMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): self
+    {
+        if ($this->classes->removeElement($class)) {
+            $class->removeMembre($this);
+        }
 
         return $this;
     }
