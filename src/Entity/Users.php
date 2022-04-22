@@ -33,7 +33,7 @@ class Users
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adresse;
 
-    #[ORM\ManyToOne(targetEntity: roles::class, inversedBy: 'users')]
+    #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
     private $role;
 
@@ -129,12 +129,12 @@ class Users
         return $this;
     }
 
-    public function getRole(): ?roles
+    public function getRole(): ?Roles
     {
         return $this->role;
     }
 
-    public function setRole(?roles $role): self
+    public function setRole(?Roles $role): self
     {
         $this->role = $role;
 

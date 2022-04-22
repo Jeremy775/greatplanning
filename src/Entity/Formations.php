@@ -21,8 +21,8 @@ class Formations
     #[ORM\OneToMany(mappedBy: 'formations', targetEntity: users::class)]
     private $users;
 
-    #[ORM\OneToMany(mappedBy: 'formations', targetEntity: cours::class)]
-    private $cours;
+    #[ORM\OneToMany(mappedBy: 'formations', targetEntity: Cours::class)]
+    private $Cours;
 
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Classe::class)]
     private $classes;
@@ -30,7 +30,7 @@ class Formations
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->cours = new ArrayCollection();
+        $this->Cours = new ArrayCollection();
         $this->classes = new ArrayCollection();
     }
 
@@ -82,26 +82,26 @@ class Formations
     }
 
     /**
-     * @return Collection<int, cours>
+     * @return Collection<int, Cours>
      */
     public function getCours(): Collection
     {
-        return $this->cours;
+        return $this->Cours;
     }
 
-    public function addCour(cours $cour): self
+    public function addCour(Cours $cour): self
     {
-        if (!$this->cours->contains($cour)) {
-            $this->cours[] = $cour;
+        if (!$this->Cours->contains($cour)) {
+            $this->Cours[] = $cour;
             $cour->setFormations($this);
         }
 
         return $this;
     }
 
-    public function removeCour(cours $cour): self
+    public function removeCour(Cours $cour): self
     {
-        if ($this->cours->removeElement($cour)) {
+        if ($this->Cours->removeElement($cour)) {
             // set the owning side to null (unless already changed)
             if ($cour->getFormations() === $this) {
                 $cour->setFormations(null);

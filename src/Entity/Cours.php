@@ -16,10 +16,10 @@ class Cours
     #[ORM\Column(type: 'string', length: 255)]
     private $nom_cours;
 
-    #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'cours')]
+    #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'Cours')]
     private $formations;
 
-    #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'cours')]
+    #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'Cours')]
     private $classe;
 
     public function getId(): ?int
