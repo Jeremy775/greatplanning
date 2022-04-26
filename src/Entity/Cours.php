@@ -17,7 +17,7 @@ class Cours
     private $nom_cours;
 
     #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'Cours')]
-    private $formations;
+    private $Formations;
 
     #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'Cours')]
     private $classe;
@@ -41,12 +41,12 @@ class Cours
 
     public function getFormations(): ?Formations
     {
-        return $this->formations;
+        return $this->Formations;
     }
 
-    public function setFormations(?Formations $formations): self
+    public function setFormations(?Formations $Formations): self
     {
-        $this->formations = $formations;
+        $this->Formations = $Formations;
 
         return $this;
     }

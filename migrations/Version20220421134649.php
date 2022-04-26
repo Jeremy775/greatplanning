@@ -21,10 +21,10 @@ final class Version20220421134649 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE Cours ADD formations_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE Cours ADD CONSTRAINT FK_FDCA8C9C3BF5B0C2 FOREIGN KEY (formations_id) REFERENCES formations (id)');
+        $this->addSql('ALTER TABLE Cours ADD CONSTRAINT FK_FDCA8C9C3BF5B0C2 FOREIGN KEY (formations_id) REFERENCES Formations (id)');
         $this->addSql('CREATE INDEX IDX_FDCA8C9C3BF5B0C2 ON Cours (formations_id)');
         $this->addSql('ALTER TABLE users ADD formations_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE users ADD CONSTRAINT FK_1483A5E93BF5B0C2 FOREIGN KEY (formations_id) REFERENCES formations (id)');
+        $this->addSql('ALTER TABLE users ADD CONSTRAINT FK_1483A5E93BF5B0C2 FOREIGN KEY (formations_id) REFERENCES Formations (id)');
         $this->addSql('CREATE INDEX IDX_1483A5E93BF5B0C2 ON users (formations_id)');
     }
 

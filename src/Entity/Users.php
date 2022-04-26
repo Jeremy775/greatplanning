@@ -41,7 +41,7 @@ class Users
     private $commentaires;
 
     #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'users')]
-    private $formations;
+    private $Formations;
 
     #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'membres')]
     private $classes;
@@ -173,12 +173,12 @@ class Users
 
     public function getFormations(): ?Formations
     {
-        return $this->formations;
+        return $this->Formations;
     }
 
-    public function setFormations(?Formations $formations): self
+    public function setFormations(?Formations $Formations): self
     {
-        $this->formations = $formations;
+        $this->Formations = $Formations;
 
         return $this;
     }

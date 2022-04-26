@@ -18,10 +18,10 @@ class Formations
     #[ORM\Column(type: 'string', length: 255)]
     private $formation;
 
-    #[ORM\OneToMany(mappedBy: 'formations', targetEntity: users::class)]
+    #[ORM\OneToMany(mappedBy: 'Formations', targetEntity: Users::class)]
     private $users;
 
-    #[ORM\OneToMany(mappedBy: 'formations', targetEntity: Cours::class)]
+    #[ORM\OneToMany(mappedBy: 'Formations', targetEntity: Cours::class)]
     private $Cours;
 
     #[ORM\OneToMany(mappedBy: 'formation', targetEntity: Classe::class)]
@@ -52,14 +52,14 @@ class Formations
     }
 
     /**
-     * @return Collection<int, users>
+     * @return Collection<int, Users>
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(users $user): self
+    public function addUser(Users $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -69,7 +69,7 @@ class Formations
         return $this;
     }
 
-    public function removeUser(users $user): self
+    public function removeUser(Users $user): self
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
@@ -139,5 +139,10 @@ class Formations
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->formation;
     }
 }

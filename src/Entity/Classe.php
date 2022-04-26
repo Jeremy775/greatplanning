@@ -15,14 +15,17 @@ class Classe
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: formations::class, inversedBy: 'classes')]
+    #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'classes')]
     private $formation;
 
-    #[ORM\ManyToMany(targetEntity: users::class, inversedBy: 'classes')]
+    #[ORM\ManyToMany(targetEntity: Users::class, inversedBy: 'classes')]
     private $membres;
 
     #[ORM\OneToMany(mappedBy: 'classe', targetEntity: Cours::class)]
     private $Cours;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $nom;
 
     public function __construct()
     {
@@ -35,12 +38,12 @@ class Classe
         return $this->id;
     }
 
-    public function getFormation(): ?formations
+    public function getFormation(): ?Formations
     {
         return $this->formation;
     }
 
-    public function setFormation(?formations $formation): self
+    public function setFormation(?Formations $formation): self
     {
         $this->formation = $formation;
 
@@ -48,14 +51,14 @@ class Classe
     }
 
     /**
-     * @return Collection<int, users>
+     * @return Collection<int, Users>
      */
     public function getMembres(): Collection
     {
         return $this->membres;
     }
 
-    public function addMembre(users $membre): self
+    public function addMembre(Users $membre): self
     {
         if (!$this->membres->contains($membre)) {
             $this->membres[] = $membre;
@@ -64,7 +67,7 @@ class Classe
         return $this;
     }
 
-    public function removeMembre(users $membre): self
+    public function removeMembre(Users $membre): self
     {
         $this->membres->removeElement($membre);
 
@@ -97,6 +100,18 @@ class Classe
                 $cour->setClasse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }
