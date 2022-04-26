@@ -22,7 +22,7 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('prenom'),
             TextField::new('mail'),
             TextField::new('mdp'),
-            AssociationField::new('role')->renderAsNativeWidget()
+            AssociationField::new('role')->renderAsNativeWidget(),
         ];
     }
 }

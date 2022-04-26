@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Classe;
+use App\Entity\Cours;
+use App\Entity\Formations;
 use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -45,5 +47,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-user-astronaut', Users::class);
         yield MenuItem::linkToCrud('Classes', 'fa-light fa-umbrella-beach', Classe::class);
+        yield MenuItem::linkToCrud('Formations', 'fa-light fa-umbrella-beach', Formations::class);
+        yield MenuItem::linkToCrud('Cours', 'fa-light fa-umbrella-beach', Cours::class);
     }
 }
