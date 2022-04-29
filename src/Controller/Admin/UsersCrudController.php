@@ -26,7 +26,7 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('prenom'),
             TextField::new('mail'),
-            TextField::new('mdp')->setFormType(PasswordType::class),
+            TextField::new('password')->setFormType(PasswordType::class),
             AssociationField::new('role')->renderAsNativeWidget(),
         ];
     }
