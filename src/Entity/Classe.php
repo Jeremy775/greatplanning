@@ -18,7 +18,7 @@ class Classe
     #[ORM\ManyToOne(targetEntity: Formations::class, inversedBy: 'classes')]
     private $formation;
 
-    #[ORM\ManyToMany(targetEntity: Users::class, inversedBy: 'classes')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'classes')]
     private $membres;
 
     #[ORM\OneToMany(mappedBy: 'classe', targetEntity: Cours::class)]
@@ -51,14 +51,14 @@ class Classe
     }
 
     /**
-     * @return Collection<int, Users>
+     * @return Collection<int, User>
      */
     public function getMembres(): Collection
     {
         return $this->membres;
     }
 
-    public function addMembre(Users $membre): self
+    public function addMembre(User $membre): self
     {
         if (!$this->membres->contains($membre)) {
             $this->membres[] = $membre;
@@ -67,7 +67,7 @@ class Classe
         return $this;
     }
 
-    public function removeMembre(Users $membre): self
+    public function removeMembre(User $membre): self
     {
         $this->membres->removeElement($membre);
 

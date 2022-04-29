@@ -4,7 +4,7 @@ security:
     password_hashers:
         # Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
         # auto hasher with default options for the User class (and children)
-        App\Entity\Users: 'auto'
+        App\Entity\User: 'auto'
 
         # auto hasher with custom options for all PasswordAuthenticatedUserInterface instances
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:

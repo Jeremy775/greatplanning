@@ -18,7 +18,7 @@ class Roles
     #[ORM\Column(type: 'string', length: 255)]
     private $role;
 
-    #[ORM\OneToMany(mappedBy: 'role', targetEntity: Users::class)]
+    #[ORM\OneToMany(mappedBy: 'role', targetEntity: User::class)]
     private $users;
 
     public function __construct()
@@ -44,14 +44,14 @@ class Roles
     }
 
     /**
-     * @return Collection<int, Users>
+     * @return Collection<int, User>
      */
     public function getUsers(): Collection
     {
         return $this->users;
     }
 
-    public function addUser(Users $user): self
+    public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
@@ -61,7 +61,7 @@ class Roles
         return $this;
     }
 
-    public function removeUser(Users $user): self
+    public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)

@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Users;
+use App\Entity\User;
 
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -16,7 +16,7 @@ class UsersCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Users::class;
+        return User::class;
     }
 
 
@@ -28,20 +28,21 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('mail'),
             TextField::new('password')->setFormType(PasswordType::class),
             AssociationField::new('role')->renderAsNativeWidget(),
+            AssociationField::new('Formations')
         ];
     }
 
 
     /**
-     * @param Users $user
+     * @param User $user
      */
-    public function setPassword(Users $user, UserPasswordHasherInterface $passwordHasher): void
+    public function setPassword(User $user, UserPasswordHasherInterface $passwordHasher): void
     {
-        $pass = $user->getMdp();
+        $pass = $user->getPassword();
 
-        $user->setMdp(
+        $user->setPassword(
             $hashedPassword = $passwordHasher->hashPassword($user, $pass)
         );
-        $user->setMdp($hashedPassword);
+        $user->setPassword($hashedPassword);
     }
 }

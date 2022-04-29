@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cours;
-use App\Entity\Users;
+use App\Entity\User;
 use App\Entity\Classe;
 use App\Entity\Formations;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +31,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-user-astronaut', Users::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-user-astronaut', User::class);
         yield MenuItem::linkToCrud('Classes', 'fa-solid fa-door-open', Classe::class);
         yield MenuItem::linkToCrud('Formations', 'fa-solid fa-book', Formations::class);
         yield MenuItem::linkToCrud('Cours', 'fa-solid fa-book-open', Cours::class);

@@ -22,7 +22,7 @@ class Commentaires
     #[ORM\Column(type: 'string', length: 255)]
     private $auteur;
 
-    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'commentaires')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commentaires')]
     private $user;
 
     public function getId(): ?int
@@ -66,12 +66,12 @@ class Commentaires
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?Users $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
