@@ -136,10 +136,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?Roles
-    {
-        return $this->role;
-    }
+    // public function getRole(): ?Roles
+    // {
+    //     return $this->role;
+    // }
 
     public function setRole(?Roles $role): self
     {
@@ -250,6 +250,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->mail;
     }
 }
