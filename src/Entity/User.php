@@ -37,9 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adresse;
 
-    #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $role;
+    // #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'users')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private $role;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commentaires::class)]
     private $commentaires;
@@ -49,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'membres')]
     private $classes;
+
+    #[ORM\Column(type: 'json')]
+    private $roles = [];
 
     public function __construct()
     {
@@ -141,12 +144,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //     return $this->role;
     // }
 
-    public function setRole(?Roles $role): self
-    {
-        $this->role = $role;
+    // public function setRole(?Roles $role): self
+    // {
+    //     $this->role = $role;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Commentaires>
@@ -232,6 +235,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
