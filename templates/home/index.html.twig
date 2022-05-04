@@ -29,17 +29,28 @@
 		<div class="card text-center m-auto shadow-lg p-5 ">
 			<div class="card-body">
 				<h5 class="card-title">Accédez à votre compte</h5>
-				<form>
+				<form action="{{ path('app_login') }}" method="post">
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+
+					{% if app.user %}
+						<div class="mb-3">
+							You are logged in as
+							{{ app.user.userIdentifier }},
+							<a href="{{ path('app_logout') }}">Logout</a>
+						</div>
+					{% endif %}
 					<!-- Email input -->
 					<div class="form-outline mb-4">
-						<input type="email" id="form2Example1" class="form-control"/>
-						<label class="form-label" for="form2Example1">Email address</label>
+						<input type="mail" value="{{ last_username }}" name="mail" id="inputEmail" class="form-control"/>
+						<label class="form-label" for="form2Example1">Email</label>
 					</div>
 
 					<!-- Password input -->
 					<div class="form-outline mb-4">
-						<input type="password" id="form2Example2" class="form-control"/>
-						<label class="form-label" for="form2Example2">Password</label>
+						<input type="password" name="password" id="inputPassword" class="form-control"/>
+						<label class="form-label" for="form2Example2">Mot de passe</label>
 					</div>
 
 					<!-- 2 column grid layout for inline styling -->
@@ -50,14 +61,16 @@
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" value="" id="form2Example31" checked/>
 								<label class="form-check-label" for="form2Example31">
-									Remember me
+									Se souvenir de moi
 								</label>
 							</div>
 						</div>
 					</div>
+					<input
+					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
 					<!-- Submit button -->
-					<button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+					<button type="submit" class="btn btn-primary btn-block mb-4">Se connecter</button>
 				</div>
 			</form>
 		</div>
