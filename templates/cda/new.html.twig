@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cda{% endblock %}
+
+{% block body %}
+    <h1>Create new Cda</h1>
+
+    {{ include('cda/_form.html.twig') }}
+
+    <a href="{{ path('app_cda_index') }}">back to list</a>
+{% endblock %}

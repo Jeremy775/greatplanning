@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cda{% endblock %}
+
+{% block body %}
+    <h1>Cda</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cda.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ cda.title }}</td>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <td>{{ cda.start ? cda.start|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>End</th>
+                <td>{{ cda.end ? cda.end|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ cda.description }}</td>
+            </tr>
+            <tr>
+                <th>Background_color</th>
+                <td>{{ cda.backgroundColor }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cda_index') }}">back to list</a>
+
+    <a href="{{ path('app_cda_edit', {'id': cda.id}) }}">edit</a>
+
+    {{ include('cda/_delete_form.html.twig') }}
+{% endblock %}
