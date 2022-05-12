@@ -17,7 +17,6 @@ class CdaType extends AbstractType
             ->add('title')
             ->add('all_day')
             ->add('start', DateTimeType::class, ['date_widget' => 'single_text'])
-            ->add('end', DateTimeType::class, ['date_widget' => 'single_text'])
             ->add('description')
             ->add('background_color', ColorType::class);
     }

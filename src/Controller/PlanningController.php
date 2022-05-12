@@ -19,7 +19,6 @@ class PlanningController extends AbstractController
             $cours[] = [
                 'id' => $event->getId(),
                 'start' => $event->getStart()->format('Y-m-d H:i:s'),
-                'end' => $event->getEnd()->format('Y-m-d H:i:s'),
                 'title' => $event->getTitle(),
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
