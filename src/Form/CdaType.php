@@ -15,6 +15,7 @@ class CdaType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('all_day')
             ->add('start', DateTimeType::class, ['date_widget' => 'single_text'])
             ->add('end', DateTimeType::class, ['date_widget' => 'single_text'])
             ->add('description')

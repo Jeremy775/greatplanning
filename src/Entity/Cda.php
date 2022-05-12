@@ -28,6 +28,9 @@ class Cda
     #[ORM\Column(type: 'string', length: 7, nullable: true)]
     private $background_color;
 
+    #[ORM\Column(type: 'boolean')]
+    private $all_day;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Cda
     public function setBackgroundColor(?string $background_color): self
     {
         $this->background_color = $background_color;
+
+        return $this;
+    }
+
+    public function getAllDay(): ?bool
+    {
+        return $this->all_day;
+    }
+
+    public function setAllDay(bool $all_day): self
+    {
+        $this->all_day = $all_day;
 
         return $this;
     }
