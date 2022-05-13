@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CoursRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
@@ -21,6 +23,14 @@ class Cours
 
     #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'Cours')]
     private $classe;
+
+    #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Cda::class)]
+    private $cdas;
+
+    public function __construct()
+    {
+        $this->cdas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +69,36 @@ class Cours
     public function setClasse(?Classe $classe): self
     {
         $this->classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cda>
+     */
+    public function getCdas(): Collection
+    {
+        return $this->cdas;
+    }
+
+    public function addCda(Cda $cda): self
+    {
+        if (!$this->cdas->contains($cda)) {
+            $this->cdas[] = $cda;
+            $cda->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCda(Cda $cda): self
+    {
+        if ($this->cdas->removeElement($cda)) {
+            // set the owning side to null (unless already changed)
+            if ($cda->getCours() === $this) {
+                $cda->setCours(null);
+            }
+        }
 
         return $this;
     }
