@@ -31,10 +31,6 @@ class Cda
     #[ORM\Column(type: 'boolean')]
     private $all_day;
 
-    #[ORM\ManyToOne(targetEntity: Cours::class, inversedBy: 'cdas')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $cours;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -108,18 +104,6 @@ class Cda
     public function setAllDay(bool $all_day): self
     {
         $this->all_day = $all_day;
-
-        return $this;
-    }
-
-    public function getCours(): ?Cours
-    {
-        return $this->cours;
-    }
-
-    public function setCours(?Cours $cours): self
-    {
-        $this->cours = $cours;
 
         return $this;
     }

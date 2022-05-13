@@ -1,43 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Cda index{% endblock %}
+{% block title %}Cda index
+{% endblock %}
 
 {% block body %}
-    <h1>Cda index</h1>
+	<h1>Cda index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Description</th>
-                <th>Background_color</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cda in cdas %}
-            <tr>
-                <td>{{ cda.id }}</td>
-                <td>{{ cda.title }}</td>
-                <td>{{ cda.start ? cda.start|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ cda.end ? cda.end|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ cda.description }}</td>
-                <td>{{ cda.backgroundColor }}</td>
-                <td>
-                    <a href="{{ path('app_cda_show', {'id': cda.id}) }}">show</a>
-                    <a href="{{ path('app_cda_edit', {'id': cda.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Cours</th>
+				<th>Début</th>
+				<th>Fin</th>
+				<th>Description</th>
+				<th>Couleur</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for cda in cdas %}
+				<tr>
+					<td>{{ cda.id }}</td>
+					<td>{{ cda.title }}</td>
+					<td>{{ cda.start ? cda.start|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ cda.end ? cda.end|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ cda.description }}</td>
+					<td>{{ cda.backgroundColor }}</td>
+					<td>
+						<a href="{{ path('app_cda_show', {'id': cda.id}) }}">voir</a>
+						<a href="{{ path('app_cda_edit', {'id': cda.id}) }}">modfier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_cda_new') }}">Create new</a>
+	<a href="{{ path('app_cda_new') }}">Ajouter</a>
 {% endblock %}
