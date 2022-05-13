@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Cda;
 use App\Entity\Cours;
 use App\Entity\User;
 use App\Entity\Classe;
@@ -35,5 +36,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Classes', 'fa-solid fa-door-open', Classe::class);
         yield MenuItem::linkToCrud('Formations', 'fa-solid fa-book', Formations::class);
         yield MenuItem::linkToCrud('Cours', 'fa-solid fa-book-open', Cours::class);
+        yield MenuItem::linkToCrud('Planning Cda', 'fa-solid fa-book-open', Cda::class);
     }
 }
