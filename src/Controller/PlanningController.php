@@ -24,7 +24,6 @@ class PlanningController extends AbstractController
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
                 'allDay' => $event->getAllDay(),
-
             ];
         }
 

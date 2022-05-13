@@ -17,7 +17,7 @@ class CdaType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('title', EntityType::class, [
+            ->add('cours', EntityType::class, [
                 'class' => Cours::class,
                 'choice_label' => 'nom_cours',
             ])
