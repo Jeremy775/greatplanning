@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Cda;
 use App\Repository\CdaRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PlanningController extends AbstractController
 {
@@ -21,6 +22,7 @@ class PlanningController extends AbstractController
                 'start' => $event->getStart()->format('Y-m-d H:i:s'),
                 'end' => $event->getEnd()->format('Y-m-d H:i:s'),
                 'title' => $event->getTitle(),
+                'url' => $event->getUrl(),
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
                 'allDay' => $event->getAllDay(),

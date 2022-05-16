@@ -31,6 +31,9 @@ class Cda
     #[ORM\Column(type: 'boolean')]
     private $all_day;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $url;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Cda
     public function setAllDay(bool $all_day): self
     {
         $this->all_day = $all_day;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }
