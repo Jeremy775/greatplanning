@@ -3,14 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cda;
-use App\Entity\Cours;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use DateTime;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 class CdaCrudController extends AbstractCrudController
 {
@@ -29,8 +28,8 @@ class CdaCrudController extends AbstractCrudController
             ChoiceField::new('title')->setChoices(array_combine($choices, $choices)),
             TextEditorField::new('description'),
             BooleanField::new('all_day'),
-            DateField::new('start'),
-            DateField::new('end'),
+            DateTimeField::new('start'),
+            DateTimeField::new('end'),
             ColorField::new('background_color')
         ];
     }

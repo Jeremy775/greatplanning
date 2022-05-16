@@ -19,7 +19,7 @@ class Cda
     #[ORM\Column(type: 'datetime')]
     private $start;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: false)]
     private $end;
 
     #[ORM\Column(type: 'text', nullable: true)]
