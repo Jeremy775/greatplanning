@@ -11,6 +11,13 @@
 		}
 	</style>
 
+	{{ form_start(form) }}
+
+	{{ form_row(form.name) }}
+
+	{{ form_row(form.submit, { 'label': 'Submit me' }) }}
+	{{ form_end(form) }}
+
 	<div class="sidebar">
 		<ul>
 			<li>

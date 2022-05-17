@@ -71,4 +71,10 @@ Commandes utilisées
         symfony console make:registration-form
 
         symfony console make:auth
+
+________________________________________________________
+
+php bin/console make:form 
+
+// création d'un formulaire a partir d'une entité
     
