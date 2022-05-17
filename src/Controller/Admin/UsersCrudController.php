@@ -39,18 +39,4 @@ class UsersCrudController extends AbstractCrudController
             AssociationField::new('Formations')
         ];
     }
-
-
-    /**
-     * @param User $user
-     */
-    public function setPassword(User $user, UserPasswordHasherInterface $passwordHasher): void
-    {
-        $pass = $user->getPassword();
-
-        $user->setPassword(
-            $hashedPassword = $passwordHasher->hashPassword($user, $pass)
-        );
-        $user->setPassword($hashedPassword);
-    }
 }
