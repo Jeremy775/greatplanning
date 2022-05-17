@@ -53,6 +53,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $assurance_maladie;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $carte_identite;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -261,5 +267,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->mail;
+    }
+
+    public function getAssuranceMaladie(): ?string
+    {
+        return $this->assurance_maladie;
+    }
+
+    public function setAssuranceMaladie(?string $assurance_maladie): self
+    {
+        $this->assurance_maladie = $assurance_maladie;
+
+        return $this;
+    }
+
+    public function getCarteIdentite(): ?string
+    {
+        return $this->carte_identite;
+    }
+
+    public function setCarteIdentite(?string $carte_identite): self
+    {
+        $this->carte_identite = $carte_identite;
+
+        return $this;
     }
 }
