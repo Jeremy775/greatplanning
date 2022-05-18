@@ -22,16 +22,20 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{id}/edit", name="app_user_form")
+     * @param User $user
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
+    #[Route('/user/{id}/edit', name: 'app_user_form', methods: ['GET', 'POST'])]
     public function edit(User $user, Request $request, UserRepository $userRepository, EntityManagerInterface $manager): Response
     {
         if (!$this->getUser()) {
-            return $this->redirectToRoute('home/index.html.twig');
+            return $this->redirectToRoute('app_login');
         }
 
         if ($this->getUser() !== $user) {
-            return $this->redirectToRoute('planning/index.html.twig');
+            return $this->redirectToRoute('planning');
         }
 
         $form = $this->createForm(UserType::class, $user);
@@ -49,7 +53,7 @@ class UserController extends AbstractController
                 'Vos informations ont été prises en compte'
             );
 
-            return $this->redirect('app_user_show');
+            return $this->redirectToRoute('planning');
         }
 
         return $this->renderForm('user/edit.html.twig', [
