@@ -37,10 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $adresse;
 
-    // #[ORM\ManyToOne(targetEntity: Roles::class, inversedBy: 'users')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private $role;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commentaires::class)]
     private $commentaires;
 
@@ -145,18 +141,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getRole(): ?Roles
-    // {
-    //     return $this->role;
-    // }
-
-    // public function setRole(?Roles $role): self
-    // {
-    //     $this->role = $role;
-
-    //     return $this;
-    // }
-
     /**
      * @return Collection<int, Commentaires>
      */
@@ -226,7 +210,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function __toString()
+    public function __toString(): String
     {
         return $this->nom;
     }
