@@ -11,18 +11,10 @@
 		}
 	</style>
 
-	{{ form_start(form) }}
-
-	{{ form_row(form.name) }}
-
-	{{ form_row(form.submit, { 'label': 'Submit me' }) }}
-	{{ form_end(form) }}
-
 	<div class="sidebar">
 		<ul>
-			<li>
-				Envoyer un fichier
-			</li>
+			<li><a href="{{ path('app_user_form',{'id':app.user.id}) }}">Envoyer un fichier</a></li>
 		</ul>
 	</div>
+
 {% endblock %}

@@ -15,7 +15,6 @@ class UserType extends AbstractType
     {
         $builder
             ->add('mail')
-            ->add('password')
             ->add('tel')
             ->add('adresse')
             ->add('assurance_maladie', FileType::class, [
