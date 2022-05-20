@@ -45,7 +45,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
+            // ASSURANCE MALADIE
             $amFile = $form->get('assurance_maladie')->getData();
 
             // this condition is needed because the 'brochure' field is not required
@@ -69,6 +69,26 @@ class UserController extends AbstractController
                 // updates the 'amFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setAssuranceMaladie($newFilename);
+            }
+
+            // CARTE D'IDENTITE
+            $idcard = $form->get('carte_identite')->getData();
+
+            if ($idcard) {
+                $originalFilename = pathinfo($idcard->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$idcard->guessExtension();
+
+                try {
+                    $idcard->move(
+                        $this->getParameter('user_idcard'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $user->setCarteIdentite($newFilename);
             }
 
 
