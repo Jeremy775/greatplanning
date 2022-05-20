@@ -27,6 +27,7 @@ class UserType extends AbstractType
             ->add('assurance_maladie', FileType::class, [
                 'label' => 'Insérez fichier d\'assurance maladie',
                 'required' => false,
+                'data_class' => null,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -43,6 +44,7 @@ class UserType extends AbstractType
             ->add('carte_identite', FileType::class, [
                 'label' => 'Insérez votre carte d\'identité',
                 'required' => false,
+                'data_class' => null,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
