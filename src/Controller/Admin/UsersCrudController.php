@@ -26,7 +26,8 @@ class UsersCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('prenom'),
             TextField::new('mail'),
-            TextField::new('password')->setFormType(PasswordType::class),
+            TextField::new('plainPassword', 'Mot de passe')->setFormType(PasswordType::class)
+                ->hideOnIndex(),
             ChoiceField::new('roles')->setChoices(array_combine($roles, $roles))
                 ->allowMultipleChoices()
                 ->renderExpanded()
@@ -56,11 +57,6 @@ class UsersCrudController extends AbstractCrudController
             // ]),
             TextField::new('assurance_maladie')->onlyOnIndex(),
             TextField::new('carte_identite')->onlyOnIndex(),
-
-
-
-
-
         ];
     }
 }
