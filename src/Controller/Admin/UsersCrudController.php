@@ -33,28 +33,6 @@ class UsersCrudController extends AbstractCrudController
                 ->renderExpanded()
                 ->renderAsBadges(),
             AssociationField::new('Formations'),
-            // ImageField::new('assurance_maladie')->setUploadDir("public\uploads\assurances")
-            //     ->setFormType(FileUploadType::class)
-            //     ->setUploadedFileNamePattern('[year]/[month]/[day]/[slug]-[contenthash].[extension]')
-            //     ->setColumns(6)
-            //     ->hideOnIndex()
-            //     ->setFormTypeOptions(['attr' => [
-            //         'accept' => 'application/pdf','image/jpeg',
-            //         'image/png',
-            //         'image/webp',
-            //     ]
-            // ]),
-            // ImageField::new('carte_identite')->setUploadDir("public\uploads\carte_identite")
-            //     ->setFormType(FileUploadType::class)
-            //     ->setUploadedFileNamePattern('[year]/[month]/[day]/[slug]-[contenthash].[extension]')
-            //     ->setColumns(6)
-            //     ->hideOnIndex()
-            //     ->setFormTypeOptions(['attr' => [
-            //         'accept' => 'application/pdf','image/jpeg',
-            //         'image/png',
-            //         'image/webp',
-            //     ]
-            // ]),
             TextField::new('assurance_maladie')->onlyOnIndex(),
             TextField::new('carte_identite')->onlyOnIndex(),
         ];
