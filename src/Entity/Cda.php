@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CdaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CdaRepository;
+use Doctrine\ORM\Mapping\PostPersist;
 
 #[ORM\Entity(repositoryClass: CdaRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Cda
 {
     #[ORM\Id]
@@ -34,6 +36,12 @@ class Cda
     #[ORM\Column(type: 'string', length: 255)]
     private $url;
 
+    /** @ORM\PostPersist */
+    public function doStuffOnPostPersist()
+    {
+        $this->setUrl('cda/'.$this->getId());
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

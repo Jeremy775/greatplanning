@@ -3,13 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Cda;
-use DateTime;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class CdaCrudController extends AbstractCrudController
 {
@@ -19,11 +19,10 @@ class CdaCrudController extends AbstractCrudController
         return Cda::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         $choices = ['Java POO', 'PHP', 'Anglais'];
-
+        
         return [
             ChoiceField::new('title')->setChoices(array_combine($choices, $choices)),
             TextEditorField::new('description'),
@@ -33,7 +32,6 @@ class CdaCrudController extends AbstractCrudController
             ColorField::new('background_color')
         ];
     }
-
 
     // Faire paginiation par mois
 }
