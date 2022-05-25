@@ -7,7 +7,8 @@ use App\Repository\CdaRepository;
 use Doctrine\ORM\Mapping\PostPersist;
 
 #[ORM\Entity(repositoryClass: CdaRepository::class)]
-#[ORM\HasLifecycleCallbacks]
+// #[ORM\HasLifecycleCallbacks]
+#[ORM\EntityListeners(['App\EntityListener\PlanningUrl'])]
 class Cda
 {
     #[ORM\Id]
@@ -34,13 +35,7 @@ class Cda
     private $all_day;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $url;
-
-    /** @ORM\PostPersist */
-    public function doStuffOnPostPersist()
-    {
-        $this->setUrl('cda/'.$this->getId());
-    }
+    private $url = 'cda/';
     
     public function getId(): ?int
     {
