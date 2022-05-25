@@ -9,32 +9,15 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 class PlanningUrl
 {
     /** @PostPersist */
-    public function postPersist(Cda $cda, LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args): void
     {
-        $a = $cda->getId();
-        dd($cda, $a, $args);
+        $entity = $args->getObject();
 
-        $cda->setUrl('cda/'.$cda->getId());
+        if (!$entity instanceof Cda) {
+            return;
+        }
+
+        $entityManager = $args->getObjectManager();
+        $entity->setUrl('cda/'.$entity->getId());
     }
-
-    // public function postUpdate(LifecycleEventArgs $args)
-    // {
-    //     dd($args);
-    //     $this->defaultUrl($args);
-    // }
-
-    // public function defaultUrl(LifecycleEventArgs $args)
-    // {
-    //     $entity = $args->getObject();
-    //     $cda_id = $entity->getId();
-    //     dump($cda_id);
-    //     if(!$entity instanceof Cda)
-    //     {
-    //         return;
-    //     }
-
-    //     $entity->setUrl('dsdf');
-
-    // }
-
 }
