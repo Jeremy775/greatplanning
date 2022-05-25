@@ -11,7 +11,9 @@ class PlanningUrl
     /** @PostPersist */
     public function postPersist(Cda $cda, LifecycleEventArgs $args)
     {
-        dd($cda, $args);
+        $a = $cda->getId();
+        dd($cda, $a, $args);
+
         $cda->setUrl('cda/'.$cda->getId());
     }
 
