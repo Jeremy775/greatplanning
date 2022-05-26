@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CoursRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoursRepository::class)]
@@ -23,9 +24,13 @@ class Cours
     #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'Cours')]
     private $classe;
 
+    #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Images::class, cascade:["persist"], orphanRemoval: true)]
+    private $images;
+
     public function __construct()
     {
         $this->cdas = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,5 +77,35 @@ class Cours
     public function __toString()
     {
         return $this->nom_cours;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getCours() === $this) {
+                $image->setCours(null);
+            }
+        }
+
+        return $this;
     }
 }

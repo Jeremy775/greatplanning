@@ -1,4 +1,16 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+
+    {# si la route est cours_edit on affiche les images #}
+    {% if app.request.attributes.get('_route') == 'app_cours_edit' %}
+        <h2>Images</h2>
+        {% for image in cour.images %}
+            <div>
+                <img src="{{ asset('/uploads/cours/' ~ image.name) }}" alt="Image" width = "150">
+                <a href="{{ path('app_cours_delete_img', {'id': image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

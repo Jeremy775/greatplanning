@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Cours;
+use App\Entity\Images;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/cours')]
 class CoursController extends AbstractController
@@ -29,6 +32,26 @@ class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // On récupere les images
+            $images = $form->get('images')->getData();
+            foreach($images as $image)
+            {
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads/cours
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stock le chemin de l'image ds la bdd
+                $img = new Images();
+                $img->setName($fichier);
+                $cour->addImage($img);
+            }
+
             $coursRepository->add($cour);
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -54,6 +77,26 @@ class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // On récupere les images
+            $images = $form->get('images')->getData();
+            foreach($images as $image)
+            {
+                // On génère un nouveau nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+ 
+                // On copie le fichier dans le dossier uploads/cours
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+ 
+                // On stock le chemin de l'image ds la bdd
+                $img = new Images();
+                $img->setName($fichier);
+                $cour->addImage($img);
+            }
+
             $coursRepository->add($cour);
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -72,5 +115,26 @@ class CoursController extends AbstractController
         }
 
         return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route("/supprime/image/{id}", name: 'app_cours_delete_img', methods: ['DELETE'])]
+    public function deleteImg(Images $image, Request $request, EntityManagerInterface $entityManager)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token'])){
+            // On récupere le nom du fichier
+            $nom = $image->getName();
+            // On supprime le fichier du disque
+            unlink($this->getParameter('images_directory').'/'.$nom);
+
+            // On supprime de la bdd
+            $entityManager->remove($image);
+            $entityManager->flush();
+
+            return new JsonResponse(['success' => 1]);
+        }else{
+            return new JsonResponse(['error' => 'Token Invalid'], 400);
+        }
     }
 }

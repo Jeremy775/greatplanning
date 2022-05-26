@@ -6,6 +6,7 @@
 parameters:
     user_assurance: '%kernel.project_dir%/public/uploads/assurances'
     user_idcard: '%kernel.project_dir%/public/uploads/carte_identite'
+    images_directory: '%kernel.project_dir%/public/uploads/cours'
 
 services:
     # default configuration for services in *this* file
