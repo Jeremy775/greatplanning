@@ -8,8 +8,16 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Nom_cours</th>
+                <th>Cours</th>
                 <td>{{ cour.nomCours }}</td>
+            </tr>
+            <tr>
+                <th>Documents</th>
+                <td> 
+                    {% for image in cour.images %}
+                        <img src="{{ asset('/uploads/cours/' ~ image.name) }}" alt="Image" width = "700vh">            
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>

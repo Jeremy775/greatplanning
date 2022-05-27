@@ -3,12 +3,12 @@
 {% block title %}Cours index{% endblock %}
 
 {% block body %}
-    <h1>Cours index</h1>
+    <h1>Cours</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Nom_cours</th>
+                <th>Cours</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ cour.nomCours }}</td>
                 <td>
-                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">show</a>
-                    <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">edit</a>
+                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">Voir</a>
+                    <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">Modifier</a>
                 </td>
             </tr>
             
@@ -30,5 +30,5 @@
         
         </tbody>
     </table>
-    <a href="{{ path('app_cours_new') }}">new</a>
+    <a href="{{ path('app_cours_new') }}">Ajouter</a>
 {% endblock %}
