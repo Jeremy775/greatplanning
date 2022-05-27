@@ -27,10 +27,14 @@ class Cours
     #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Images::class, cascade:["persist"], orphanRemoval: true)]
     private $images;
 
+    #[ORM\OneToMany(mappedBy: 'cours', targetEntity: Commentaires::class, cascade:["persist"])]
+    private $commentaires;
+
     public function __construct()
     {
         $this->cdas = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -103,6 +107,36 @@ class Cours
             // set the owning side to null (unless already changed)
             if ($image->getCours() === $this) {
                 $image->setCours(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaires>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaires $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setCours($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaires $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getCours() === $this) {
+                $commentaire->setCours(null);
             }
         }
 

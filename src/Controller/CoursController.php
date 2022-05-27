@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaires;
 use App\Entity\Cours;
 use App\Entity\Images;
 use App\Form\CoursType;
@@ -54,6 +55,14 @@ class CoursController extends AbstractController
                 $cour->addImage($img);
             }
 
+            // On récupere les commentaires
+            $commentaires = $form->get('commentaires')->getData();
+            
+            $comm = new Commentaires();
+            $comm->setText($commentaires)->setCreatedAt();
+            $cour->addCommentaire($comm);
+            // -----------------------------------
+
             $coursRepository->add($cour);
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -99,6 +108,14 @@ class CoursController extends AbstractController
                 $img->setName($fichier);
                 $cour->addImage($img);
             }
+
+            // On récupere les commentaires
+            $commentaires = $form->get('commentaires')->getData();
+            
+            $comm = new Commentaires();
+            $comm->setText($commentaires)->setCreatedAt();
+            $cour->addCommentaire($comm);
+            // -----------------------------------
 
             $coursRepository->add($cour);
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);

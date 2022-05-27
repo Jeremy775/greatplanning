@@ -4,9 +4,10 @@ namespace App\Form;
 
 use App\Entity\Cours;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CoursType extends AbstractType
 {
@@ -14,10 +15,15 @@ class CoursType extends AbstractType
     {
         $builder
             ->add('nom_cours')
+            ->add('commentaires', TextareaType::class, [
+                'mapped' => false,
+                'label' => 'commentaire',
+            ])
             ->add('images', FileType::class, [
                 'label' => false,
                 'multiple' => true,
                 'mapped' => false,
+                'required' => false,
             ])
             ->add('Formations')
             ->add('classe')

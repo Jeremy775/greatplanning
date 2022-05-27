@@ -12,6 +12,14 @@
                 <td>{{ cour.nomCours }}</td>
             </tr>
             <tr>
+                <th>Commentaire</th>
+                <td>
+                {% for commentaire in cour.commentaires %}
+                    <div>{{ commentaire.text }}</div>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
                 <th>Documents</th>
                 <td> 
                     {% for image in cour.images %}

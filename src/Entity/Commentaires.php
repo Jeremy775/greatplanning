@@ -19,11 +19,16 @@ class Commentaires
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $auteur;
-
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commentaires')]
     private $user;
+
+    #[ORM\ManyToOne(targetEntity: cours::class, inversedBy: 'commentaires')]
+    private $cours;
+
+    public function __construct()
+    {   
+        $this->setCreatedAt(new \DateTime());
+    }
 
     public function getId(): ?int
     {
@@ -54,18 +59,6 @@ class Commentaires
         return $this;
     }
 
-    public function getAuteur(): ?string
-    {
-        return $this->auteur;
-    }
-
-    public function setAuteur(string $auteur): self
-    {
-        $this->auteur = $auteur;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -74,6 +67,18 @@ class Commentaires
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCours(): ?cours
+    {
+        return $this->cours;
+    }
+
+    public function setCours(?cours $cours): self
+    {
+        $this->cours = $cours;
 
         return $this;
     }
