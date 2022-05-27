@@ -10,8 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/cours')]
 class CoursController extends AbstractController
@@ -25,6 +26,7 @@ class CoursController extends AbstractController
     }
 
     #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
     public function new(Request $request, CoursRepository $coursRepository): Response
     {
         $cour = new Cours();
@@ -71,6 +73,7 @@ class CoursController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_cours_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
     public function edit(Request $request, Cours $cour, CoursRepository $coursRepository): Response
     {
         $form = $this->createForm(CoursType::class, $cour);
@@ -108,6 +111,7 @@ class CoursController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_cours_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
     public function delete(Request $request, Cours $cour, CoursRepository $coursRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$cour->getId(), $request->request->get('_token'))) {
@@ -118,6 +122,7 @@ class CoursController extends AbstractController
     }
 
     #[Route("/supprime/image/{id}", name: 'app_cours_delete_img', methods: ['DELETE'])]
+    #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
     public function deleteImg(Images $image, Request $request, EntityManagerInterface $entityManager)
     {
         $data = json_decode($request->getContent(), true);
