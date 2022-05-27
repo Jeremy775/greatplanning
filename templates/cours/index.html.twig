@@ -35,4 +35,26 @@
     {% if is_granted('ROLE_FORMATEUR') %}
         <a href="{{ path('app_cours_new') }}">Ajouter</a>
     {% endif %}
-{% endblock %}
+
+
+
+
+    <div class="container">
+        <div class="row">
+
+            {% for cour in cours %}
+
+                <div class="col-sm">
+                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">{{ cour.nomCours }}</a>
+                </div>
+
+            {% else %}
+
+            <span>Nous n'avons rien trouvé</span>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    {% endblock %}
