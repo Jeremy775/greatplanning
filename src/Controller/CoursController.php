@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Commentaires;
 use App\Entity\Cours;
 use App\Entity\Images;
+use App\Form\CommentType;
 use App\Form\CoursType;
 use App\Repository\CoursRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +20,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/cours')]
 class CoursController extends AbstractController
 {
+
+
     #[Route('/', name: 'app_cours_index', methods: ['GET'])]
     public function index(CoursRepository $coursRepository): Response
     {
@@ -25,6 +29,9 @@ class CoursController extends AbstractController
             'cours' => $coursRepository->findAll(),
         ]);
     }
+
+
+
 
     #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
@@ -55,14 +62,6 @@ class CoursController extends AbstractController
                 $cour->addImage($img);
             }
 
-            // On récupere les commentaires
-            $commentaires = $form->get('commentaires')->getData();
-            
-            $comm = new Commentaires();
-            $comm->setText($commentaires)->setCreatedAt();
-            $cour->addCommentaire($comm);
-            // -----------------------------------
-
             $coursRepository->add($cour);
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,13 +72,38 @@ class CoursController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_cours_show', methods: ['GET'])]
-    public function show(Cours $cour): Response
+
+
+    #[Route('/{id}', name: 'app_cours_show', methods: ['GET', 'POST'])]
+    public function show(Cours $cour, Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Commentaires
+        // On créer le commentaire
+        $comm = new Commentaires();
+
+        // On genere le formulaire
+        $form = $this->createForm(CommentType::class, $comm);
+
+        $form->handleRequest($request);
+
+        // Traitement du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comm->setCreatedAt(new DateTime());
+            $comm->setCours($cour);
+
+            $entityManager->persist($comm);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_cours_show', ['id' => $cour->getId()]);
+        }
+
         return $this->render('cours/show.html.twig', [
             'cour' => $cour,
+            'form' => $form->createView(),
         ]);
     }
+
+
 
     #[Route('/{id}/edit', name: 'app_cours_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
@@ -109,14 +133,6 @@ class CoursController extends AbstractController
                 $cour->addImage($img);
             }
 
-            // On récupere les commentaires
-            $commentaires = $form->get('commentaires')->getData();
-            
-            $comm = new Commentaires();
-            $comm->setText($commentaires)->setCreatedAt();
-            $cour->addCommentaire($comm);
-            // -----------------------------------
-
             $coursRepository->add($cour);
             return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -126,6 +142,9 @@ class CoursController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+
 
     #[Route('/{id}', name: 'app_cours_delete', methods: ['POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
@@ -137,6 +156,9 @@ class CoursController extends AbstractController
 
         return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
 
     #[Route("/supprime/image/{id}", name: 'app_cours_delete_img', methods: ['DELETE'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]

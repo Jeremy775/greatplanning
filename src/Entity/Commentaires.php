@@ -25,11 +25,6 @@ class Commentaires
     #[ORM\ManyToOne(targetEntity: cours::class, inversedBy: 'commentaires')]
     private $cours;
 
-    public function __construct()
-    {   
-        $this->setCreatedAt(new \DateTime());
-    }
-
     public function getId(): ?int
     {
         return $this->id;

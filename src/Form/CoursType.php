@@ -15,10 +15,6 @@ class CoursType extends AbstractType
     {
         $builder
             ->add('nom_cours')
-            ->add('commentaires', TextareaType::class, [
-                'mapped' => false,
-                'label' => 'commentaire',
-            ])
             ->add('images', FileType::class, [
                 'label' => false,
                 'multiple' => true,

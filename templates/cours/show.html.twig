@@ -5,6 +5,11 @@
 {% block body %}
     <h1>{{ cour.nomCours }}</h1>
 
+    {# Formulaire commentaire #}
+    <div class="container">
+        {{ form(form) }}
+    </div>
+
     <table class="table">
         <tbody>
             <tr>
@@ -16,6 +21,7 @@
                 <td>
                 {% for commentaire in cour.commentaires %}
                     <div>{{ commentaire.text }}</div>
+                    <small> - {{ commentaire.createdAt|date("d/m/y") }}</small>
                 {% endfor %}
                 </td>
             </tr>
