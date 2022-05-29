@@ -22,6 +22,8 @@
                 {% for commentaire in cour.commentaires %}
                     <div>{{ commentaire.text }}</div>
                     <small> - {{ commentaire.createdAt|date("d/m/y") }}</small>
+                    {# <a href="{{ path('app_cours_delete_comm', {'id': commentaire.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ commentaire.id) }}">Supprimer</a> #}
+                    {{ include('cours/_delete_comm.html.twig') }}
                 {% endfor %}
                 </td>
             </tr>

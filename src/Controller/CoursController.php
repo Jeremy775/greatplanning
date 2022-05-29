@@ -7,6 +7,7 @@ use App\Entity\Cours;
 use App\Entity\Images;
 use App\Form\CommentType;
 use App\Form\CoursType;
+use App\Repository\CommentairesRepository;
 use App\Repository\CoursRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -152,6 +153,21 @@ class CoursController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$cour->getId(), $request->request->get('_token'))) {
             $coursRepository->remove($cour);
+        }
+
+        return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+
+    
+    #[Route('/supprime/commentaire/{id}', name: 'app_cours_delete_comm', methods: ['POST'])]
+    #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
+    public function deleteComm(Cours $cour, Request $request, Commentaires $comm, CommentairesRepository $commentairesRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$comm->getId(), $request->request->get('_token'))) {
+            $commentairesRepository->remove($comm);
         }
 
         return $this->redirectToRoute('app_cours_index', [], Response::HTTP_SEE_OTHER);
