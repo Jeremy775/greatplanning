@@ -33,6 +33,7 @@ class CoursController extends AbstractController
 
 
 
+    // ------------------------AJOUTER UN COURS-------------------------------------------
 
     #[Route('/new', name: 'app_cours_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
@@ -106,6 +107,9 @@ class CoursController extends AbstractController
 
 
 
+
+    // -----------------------MODIFIER UN COURS-------------------------------------------
+
     #[Route('/{id}/edit', name: 'app_cours_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
     public function edit(Request $request, Cours $cour, CoursRepository $coursRepository): Response
@@ -147,6 +151,8 @@ class CoursController extends AbstractController
 
 
 
+    // --------------------SUPPRIMER UN COURS-------------------------------------------
+
     #[Route('/{id}', name: 'app_cours_delete', methods: ['POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
     public function delete(Request $request, Cours $cour, CoursRepository $coursRepository): Response
@@ -161,6 +167,7 @@ class CoursController extends AbstractController
 
 
 
+    // --------------------SUPPRIMER UN COMMENTAIRE-------------------------------------------
     
     #[Route('/supprime/commentaire/{id}', name: 'app_cours_delete_comm', methods: ['POST'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]
@@ -175,6 +182,7 @@ class CoursController extends AbstractController
 
 
 
+    // --------------------SUPPRIMER UNE IMAGE-------------------------------------------
 
     #[Route("/supprime/image/{id}", name: 'app_cours_delete_img', methods: ['DELETE'])]
     #[IsGranted('ROLE_FORMATEUR', statusCode: 404, message: "Il n'y a rien à voir ici")]

@@ -16,7 +16,7 @@
 			{% endif %}
 			{% if app.user %}
 				
-				{% if is_granted('ROLE_USER') or is_granted('ROLE_FORMATEUR') %}
+				{% if is_granted('ROLE_USER') %}
 					
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_user_show', {'id': app.user.id}) }}">

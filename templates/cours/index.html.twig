@@ -5,39 +5,12 @@
 {% block body %}
     <h1>Cours</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Cours</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cour in cours %}
-            <tr>
-                <td>{{ cour.nomCours }}</td>
-                <td>
-                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">Voir</a>
-                   {% if is_granted('ROLE_FORMATEUR') %}
-                        <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">Modifier</a>
-                   {% endif %}
-                </td>
-            </tr>
-            
-        {% else %}
-            <tr>
-                <td colspan="3">Nous n'avons rien trouvé</td>
-            </tr>
-        {% endfor %}
-        
-        </tbody>
-    </table>
-    {% if is_granted('ROLE_FORMATEUR') %}
-        <a href="{{ path('app_cours_new') }}">Ajouter</a>
-    {% endif %}
-
-
-
+    <div class="container">
+        {% if is_granted('ROLE_FORMATEUR') %}
+            <a href="{{ path('app_cours_new') }}">Ajouter un cours</a>
+        {% endif %}
+    </div>
+    
 
     <div class="container">
         <div class="row">
@@ -45,7 +18,15 @@
             {% for cour in cours %}
 
                 <div class="col-sm">
-                    <a href="{{ path('app_cours_show', {'id': cour.id}) }}">{{ cour.nomCours }}</a>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ path('app_cours_show', {'id': cour.id}) }}">{{ cour.nomCours }}</a></h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            {% if is_granted('ROLE_FORMATEUR') %}
+                                <a href="{{ path('app_cours_edit', {'id': cour.id}) }}">Modifier</a>
+                            {% endif %}       
+                        </div>
+                    </div>
                 </div>
 
             {% else %}
@@ -58,3 +39,5 @@
     </div>
 
     {% endblock %}
+
+    
