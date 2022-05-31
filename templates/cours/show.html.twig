@@ -6,11 +6,15 @@
 <div style="margin:5vh">
     <h1>{{ cour.nomCours }}</h1>
 
-    {# Formulaire commentaire #}
-    <div class="container">
-        {{ form(form) }}
-    </div>
+    {% if is_granted('ROLE_FORMATEUR') %}
+    
+        {# Formulaire commentaire #}
+        <div class="container">
+            {{ form(form) }}
+        </div>
 
+    {% endif %}
+    
     <table class="table">
         <tbody>
             <tr>
