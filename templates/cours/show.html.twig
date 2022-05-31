@@ -3,6 +3,7 @@
 {% block title %}{{ cour.nomCours }}{% endblock %}
 
 {% block body %}
+<div style="margin:5vh">
     <h1>{{ cour.nomCours }}</h1>
 
     {# Formulaire commentaire #}
@@ -39,5 +40,5 @@
     </table>
 
     <a href="{{ path('app_cours_index') }}">Retour à la liste</a>
-
+</div>
 {% endblock %}

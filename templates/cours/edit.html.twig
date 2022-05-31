@@ -3,6 +3,8 @@
 {% block title %}Modifier un Cours{% endblock %}
 
 {% block body %}
+
+<div style="margin:5vh">
     <h1>Modification du Cours</h1>
 
     {{ include('cours/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,6 +12,7 @@
     <a href="{{ path('app_cours_index') }}">Retour à la liste</a>
 
     {{ include('cours/_delete_form.html.twig') }}
+</div>
 {% endblock %}
 
 {% block javascripts %}

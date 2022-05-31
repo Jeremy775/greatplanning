@@ -3,9 +3,9 @@
 {% block title %}Cours index{% endblock %}
 
 {% block body %}
-    <h1>Cours</h1>
+    <h1 style="margin:5vh">Cours</h1>
 
-    <div class="container">
+    <div style="margin:5vh">
         {% if is_granted('ROLE_FORMATEUR') %}
             <a href="{{ path('app_cours_new') }}">Ajouter un cours</a>
         {% endif %}
